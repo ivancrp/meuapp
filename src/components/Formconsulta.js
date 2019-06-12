@@ -6,14 +6,14 @@ export default class Formconsulta extends React.Component {
   constructor(props){
     super(props);
     this.state ={ isLoading: true,
-      
+      numProcesso:''
     
     }
    
   }
- componentDidMount(){
- numProcesso = '09000/2018-8'
-    return fetch('https://contexto-api.tce.ce.gov.br/processos/porNumero?numero='+numProcesso)
+  pesquisar =()=>{
+const Processo = this.state.numProcesso;
+    return fetch('https://contexto-api.tce.ce.gov.br/processos/porNumero?numero='+Processo)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -31,29 +31,31 @@ export default class Formconsulta extends React.Component {
 
   render(){
 
-    if(this.state.isLoading){
+     if(this.state.pesquisar){
       return(
         <View>
          <ActivityIndicator size="large" color="#0000ff" />
         </View>
       )
-    }
+    } 
 
     return(
       <View style={styles.container}>
        
-       <View>
-             <TextInput style={styles.inputBox} 
-                underlineColorAndroid='rgba(0,0,0,0)' 
-                placeholder="Consulta de Processo"
-                placeholderTextColor = '#ffffff'
-                selectionColor="#fff"
-                keyboardType="default"
-                value={this.state.numProcesso}
-                onChangeText={(numProcesso)=> this.setState({numProcesso})}
+       <View style={{Flex:2}}>
+       <TextInput style={styles.inputBox} 
+              underlineColorAndroid='rgba(0,0,0,0)' 
+              placeholder="Consulta de Processo"
+              placeholderTextColor = "#ffffff"
+              selectionColor="#fff"
+              keyboardType="default"
+              onSubmitEditing={()=> this. numProcesso.focus()}
+             value={this.state. numProcesso}
+            onChangeText={ numProcesso => this.setState({ numProcesso})}
+              title='consultar'
               />
-
-              <TouchableOpacity style={styles.button} onPress={this.componentDidMount}>
+             
+              <TouchableOpacity style={styles.button} onPress={this.pesquisar}>
                  <Text style={styles.buttonText}>{this.props.type}</Text>
               </TouchableOpacity>  
 
@@ -88,7 +90,8 @@ const styles = StyleSheet.create({
   container : {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+   
   },
 
   inputBox: {

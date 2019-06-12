@@ -37,12 +37,12 @@ export default class Consulta extends Component {
 const styles = StyleSheet.create({
   container : {
     backgroundColor:'#ffffff',
-    flex: 1,
+
     alignItems:'center',
     justifyContent :'center'
   },
   signupTextCont : {
-  	flexGrow: 1,
+  	flexGrow: 2,
     alignItems:'flex-end',
     justifyContent :'center',
     paddingVertical:16,
