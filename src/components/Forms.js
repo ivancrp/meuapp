@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  StyleSheet,  Text,  View,  TextInput,  TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
-import {Actions,Router} from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
 
 export default class Form extends Component {
   consulta() {

@@ -57,5 +57,11 @@ const styles = StyleSheet.create({
   	color:'#0c30e3',
   	fontSize:16,
   	fontWeight:'500'
+  },
+
+  logo: {
+  	color:'#0c30e3',
+  	fontSize:16,
+  	fontWeight:'500'
   }
 });
