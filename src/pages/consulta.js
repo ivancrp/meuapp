@@ -23,7 +23,7 @@ export default class Consulta extends Component {
 	render() {
 		return(
 			<View style={styles.container}>
-				<Logo/>
+				<Logo />
 				<Form type="Pesquisar"/>
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Já tem uma conta?</Text>
@@ -36,8 +36,8 @@ export default class Consulta extends Component {
 
 const styles = StyleSheet.create({
   container : {
-    backgroundColor:'#ffffff',
-
+    backgroundColor:'#red',
+    flex: 1,
     alignItems:'center',
     justifyContent :'center'
   },
