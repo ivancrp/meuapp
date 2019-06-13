@@ -11,7 +11,7 @@ export default class Logo extends Component{
 		return(
 			<View style={styles.container}>
 				<Image  style={{width:259, height: 195}}
-          			source={require('../../assets/img/TCE.png')}/>
+        source={require('../../assets/img/TCE.png')}/>
           		
   			</View>
 				
@@ -22,8 +22,14 @@ export default class Logo extends Component{
 const styles = StyleSheet.create({
   container : {
     flexGrow: 1,
-    justifyContent:'flex-end',
-    alignItems: 'center'
+    justifyContent:'flex-start',
+    alignItems: 'center',
+    paddingTop:30
+    
+  },
+  logoText : {
+  	marginVertical: 15,
+  	fontSize:18,
+  	color: '#0c30e3'//'rgba(255, 255, 255, 0.7)'
   }
-  
 });
