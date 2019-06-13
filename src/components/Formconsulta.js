@@ -1,93 +1,87 @@
-import React from 'react';
-import { FlatList, ActivityIndicator, Text, View,StyleSheet,TextInput,TouchableOpacity  } from 'react-native';
+import React, { Component } from 'react';
+import {  StyleSheet,  Text,  View,  TextInput,  TouchableOpacity,Alert } from 'react-native';
+import firebase from 'firebase';
+import {Actions} from 'react-native-router-flux';
 
-export default class Formconsulta extends React.Component {
-
-  constructor(props){
-    super(props);
-    this.state ={ isLoading: true,
-      
-    
-    }
-   
-  }
- componentDidMount(){
- numProcesso = '09000/2018-8'
-    return fetch('https://contexto-api.tce.ce.gov.br/processos/porNumero?numero='+numProcesso)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson.data,
-        }, function(){
-
-        });
-
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
-  }
-
-  render(){
-
-    if(this.state.isLoading){
-      return(
-        <View>
-         <ActivityIndicator size="large" color="#0000ff" />
-        </View>
-      )
-    }
-
-    return(
-      <View style={styles.container}>
-       
-       <View>
-             <TextInput style={styles.inputBox} 
-                underlineColorAndroid='rgba(0,0,0,0)' 
-                placeholder="Consulta de Processo"
-                placeholderTextColor = '#ffffff'
-                selectionColor="#fff"
-                keyboardType="default"
-                value={this.state.numProcesso}
-                onChangeText={(numProcesso)=> this.setState({numProcesso})}
-              />
-
-              <TouchableOpacity style={styles.button} onPress={this.componentDidMount}>
-                 <Text style={styles.buttonText}>{this.props.type}</Text>
-              </TouchableOpacity>  
-
-       </View>
-
-         
-         
-            
-       <View>
-              <FlatList style={{ marginTop: 30 }}
-                contentContainerStyle={styles.listItem}
-                data={this.state.dataSource}
-                renderItem={({item}) =>
-                
-                <View>
-                  <Text style={styles.textProcesso}>{item.nrProcesso} </Text>
-                  <Text> {item.assunto}</Text>
-                </View>
-               }
-               keyExtractor={id => id.toString ()}
-        />
-       </View>
-        
-     
-
-    </View>
-    );
-  }
-
+export default class Form extends Component {
+  consulta() {
+    Actions.consulta();
 }
+  
+  state={
+    email:'',
+    password:'',
+    isAuthenticated:false,
+    erro:''
+     };
+
+     
+  login = async()=>{
+    const{email,password}= this.state;
+    
+    try{
+        const user = await firebase.auth().signInWithEmailAndPassword(email,password); 
+        console.log('user', user);
+        Actions.consulta()   
+            
+    }catch (err){
+       // console.log('EROROOO', err);
+        Alert.alert(
+          //titulo
+          'Alerta!',
+          //Corpo
+          'Usuario ou senha incoreto!',
+          [
+            { text: 'Sair', onPress: () => this._simpleAlertHandler },
+           
+          ],
+          { cancelable: false }
+          //clicking out side of alert will not cancel
+        );
+      
+    }  
+
+  }
+
+	render(){
+		return(
+			<View style={styles.container}>
+          <TextInput style={styles.inputBox} 
+              underlineColorAndroid='rgba(0,0,0,0)' 
+              placeholder="Email"
+              placeholderTextColor = "#ffffff"
+              selectionColor="#fff"
+              keyboardType="email-address"
+              onSubmitEditing={()=> this.email.focus()}
+             value={this.state.email}
+            onChangeText={email => this.setState({email})}
+              title='email'
+              />
+          <TextInput style={styles.inputBox} 
+              underlineColorAndroid='rgba(0,0,0,0)'  
+              placeholder="Password"
+              secureTextEntry={true}
+              placeholderTextColor = "#ffffff"
+              ref={(input) => this.password = input}
+             value={this.state.password}
+              onChangeText={password => this.setState({password})}
+              title='password'
+              />  
+           <TouchableOpacity style={styles.button} onPress={this.login}>
+             <Text style={styles.buttonText}>{this.props.type}</Text>
+           </TouchableOpacity>  
+
+
+
+        		</View>
+			)
+	}
+}
+
 const styles = StyleSheet.create({
   container : {
-    flex: 1,
-    justifyContent: 'center',
+    flexGrow: 1,
+    justifyContent:'center',
     alignItems: 'center'
   },
 
@@ -114,15 +108,9 @@ const styles = StyleSheet.create({
     fontWeight:'500',
     color:'#ffffff',
     textAlign:'center'
-  },
-  listItem: {
-    backgroundColor: '#EEE',
-    marginTop: 20,
-    padding: 30,
-  },
-  textProcesso: {
-    fontWeight: 'bold',
-    fontSize: 18
-  },
+  }
   
 });
+
+
+ 
