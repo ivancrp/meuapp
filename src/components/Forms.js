@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  StyleSheet,  Text,  View,  TextInput,  TouchableOpacity } from 'react-native';
+import {  StyleSheet,  Text,  View,  TextInput,  TouchableOpacity,Alert } from 'react-native';
 import firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 
@@ -25,7 +25,19 @@ export default class Form extends Component {
         Actions.consulta()   
             
     }catch (err){
-        console.log('EROROOO', err);
+       // console.log('EROROOO', err);
+        Alert.alert(
+          //titulo
+          'Alerta!',
+          //Corpo
+          'Usuario ou senha incoreto!',
+          [
+            { text: 'Sair', onPress: () => this._simpleAlertHandler },
+           
+          ],
+          { cancelable: false }
+          //clicking out side of alert will not cancel
+        );
       
     }  
 
@@ -50,7 +62,7 @@ export default class Form extends Component {
               placeholder="Password"
               secureTextEntry={true}
               placeholderTextColor = "#ffffff"
-            ref={(input) => this.password = input}
+              ref={(input) => this.password = input}
              value={this.state.password}
               onChangeText={password => this.setState({password})}
               title='password'

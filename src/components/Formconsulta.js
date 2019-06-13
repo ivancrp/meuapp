@@ -7,13 +7,13 @@ export default class Formconsulta extends React.Component {
     super(props);
     this.state ={ isLoading: true,
       numProcesso:''
-    
+   
     }
    
   }
-  pesquisar =()=>{
-const Processo = this.state.numProcesso;
-    return fetch('https://contexto-api.tce.ce.gov.br/processos/porNumero?numero='+Processo)
+  consutar =()=>{
+ processo = this.state.numProcesso
+    return fetch('https://contexto-api.tce.ce.gov.br/processos/porNumero?numero='+processo)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -31,31 +31,29 @@ const Processo = this.state.numProcesso;
 
   render(){
 
-     if(this.state.pesquisar){
+    if(this.state.consutar){
       return(
         <View>
          <ActivityIndicator size="large" color="#0000ff" />
         </View>
       )
-    } 
+    }
 
     return(
-      <View style={styles.container}>
+      <View style={styles.container} >
        
-       <View style={{Flex:2}}>
-       <TextInput style={styles.inputBox} 
-              underlineColorAndroid='rgba(0,0,0,0)' 
-              placeholder="Consulta de Processo"
-              placeholderTextColor = "#ffffff"
-              selectionColor="#fff"
-              keyboardType="default"
-              onSubmitEditing={()=> this. numProcesso.focus()}
-             value={this.state. numProcesso}
-            onChangeText={ numProcesso => this.setState({ numProcesso})}
-              title='consultar'
+       <View>
+             <TextInput style={styles.inputBox} 
+                underlineColorAndroid='rgba(0,0,0,0)' 
+                placeholder="Consulta de Processo"
+                placeholderTextColor = '#ffffff'
+                selectionColor="#fff"
+                keyboardType="default"
+                value={this.state.numProcesso}
+                onChangeText={(numProcesso)=> this.setState({numProcesso})}
               />
-             
-              <TouchableOpacity style={styles.button} onPress={this.pesquisar}>
+
+              <TouchableOpacity style={styles.button} onPress={this.consutar}>
                  <Text style={styles.buttonText}>{this.props.type}</Text>
               </TouchableOpacity>  
 
@@ -64,13 +62,13 @@ const Processo = this.state.numProcesso;
          
          
             
-       <View>
-              <FlatList style={{ marginTop: 30 }}
+       <View style={styles.lista}>
+              <FlatList 
                 contentContainerStyle={styles.listItem}
                 data={this.state.dataSource}
                 renderItem={({item}) =>
                 
-                <View>
+                <View style={styles.footer}>
                   <Text style={styles.textProcesso}>{item.nrProcesso} </Text>
                   <Text> {item.assunto}</Text>
                 </View>
@@ -90,8 +88,7 @@ const styles = StyleSheet.create({
   container : {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-   
+    alignItems: 'center'
   },
 
   inputBox: {
@@ -119,13 +116,19 @@ const styles = StyleSheet.create({
     textAlign:'center'
   },
   listItem: {
-    backgroundColor: '#EEE',
+    
+    backgroundColor: '#fff',
     marginTop: 20,
     padding: 30,
   },
   textProcesso: {
     fontWeight: 'bold',
     fontSize: 18
+  },
+  lista : {
+    flexGrow: 4,
+    justifyContent:'center',
+    alignItems: 'center'
   },
   
 });
