@@ -11,7 +11,7 @@ export default class Formconsulta extends React.Component {
     }
    
   }
-  login =()=>{
+  consutar =()=>{
  processo = this.state.numProcesso
     return fetch('https://contexto-api.tce.ce.gov.br/processos/porNumero?numero='+processo)
       .then((response) => response.json())
@@ -31,7 +31,7 @@ export default class Formconsulta extends React.Component {
 
   render(){
 
-    if(this.state.isLoading){
+    if(this.state.consutar){
       return(
         <View>
          <ActivityIndicator size="large" color="#0000ff" />
@@ -40,7 +40,7 @@ export default class Formconsulta extends React.Component {
     }
 
     return(
-      <View style={styles.container}>
+      <View style={styles.container} >
        
        <View>
              <TextInput style={styles.inputBox} 
@@ -53,7 +53,7 @@ export default class Formconsulta extends React.Component {
                 onChangeText={(numProcesso)=> this.setState({numProcesso})}
               />
 
-              <TouchableOpacity style={styles.button} onPress={this.componentDidMount}>
+              <TouchableOpacity style={styles.button} onPress={this.consutar}>
                  <Text style={styles.buttonText}>{this.props.type}</Text>
               </TouchableOpacity>  
 
@@ -68,7 +68,7 @@ export default class Formconsulta extends React.Component {
                 data={this.state.dataSource}
                 renderItem={({item}) =>
                 
-                <View>
+                <View style={styles.footer}>
                   <Text style={styles.textProcesso}>{item.nrProcesso} </Text>
                   <Text> {item.assunto}</Text>
                 </View>
