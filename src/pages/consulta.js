@@ -9,7 +9,7 @@ import {
 
 
 
-import Logo from '../components/Logo';
+import Logo from '../../src/components/Logo'
 import Form from '../components/Formconsulta';
 
 import {Actions} from 'react-native-router-flux';
@@ -23,11 +23,13 @@ export default class Consulta extends Component {
 	render() {
 		return(
 			<View style={styles.container}>
-				<Logo/>
-				<Form type="Pesquisar"/>
-				<View style={styles.signupTextCont}>
-					<Text style={styles.signupText}>Já tem uma conta?</Text>
-					<TouchableOpacity onPress={this.login}><Text style={styles.signupButton}> Sair</Text></TouchableOpacity>
+       <Logo/>
+				<Form type="Pesquisar" style={{flex:2}}/>
+       
+				<View style={styles.signupTextCont}> 
+					<TouchableOpacity onPress={this.login}>
+            <Text style={styles.signupButton}> Já tem uma, Sair</Text>
+          </TouchableOpacity>
 				</View>
 			</View>	
 			)
@@ -41,27 +43,22 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent :'center'
   },
-  signupTextCont : {
-  	flexGrow: 1,
+  signupTextCont : { //signupTextCont
+  	flexGrow:1,
     alignItems:'flex-end',
     justifyContent :'center',
     paddingVertical:16,
     flexDirection:'row'
+    
   },
   signupText: {
   	color:'#0c30e3',//'#0c30e3', // 'rgba(255,255,255,0.6)',
-    fontSize:16,
-    flex: 1
+  	fontSize:16
   },
   signupButton: {
   	color:'#0c30e3',
   	fontSize:16,
   	fontWeight:'500'
   },
-
-  logo: {
-  	color:'#0c30e3',
-  	fontSize:16,
-  	fontWeight:'500'
-  }
+  
 });

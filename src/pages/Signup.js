@@ -24,6 +24,7 @@ export default class Signup extends Component {
 		return(
 			<View style={styles.container}>
 				<Logo/>
+        <Text style={styles.cadastro}>CADASTRO DE USUÁRIOS</Text>
 				<Form type="Cadastrar"/>
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Já tem uma conta?</Text>
@@ -56,5 +57,11 @@ const styles = StyleSheet.create({
   	color:'#0c30e3',
   	fontSize:16,
   	fontWeight:'500'
-  }
+  },
+  cadastro: {
+    fontSize:25,
+    fontWeight:'500',
+    color:'#1c313a',
+    textAlign:'center'
+  },
 });

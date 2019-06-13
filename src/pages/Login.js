@@ -24,6 +24,7 @@ export default class Login extends Component {
 		return(
 			<View style={styles.container}>
 				<Logo/>
+        <Text style={styles.login}>LOGIN</Text>
 				<Form type="Entrar"/>
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Não tem uma conta?</Text>
@@ -55,5 +56,11 @@ const styles = StyleSheet.create({
   	color:'#0c30e3',
   	fontSize:16,
   	fontWeight:'500'
-  }
+  },
+  login: {
+    fontSize:25,
+    fontWeight:'500',
+    color:'#1c313a',
+    textAlign:'center'
+  },
 });
