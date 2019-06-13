@@ -62,8 +62,8 @@ export default class Formconsulta extends React.Component {
          
          
             
-       <View>
-              <FlatList style={{ marginTop: 30 }}
+       <View style={styles.lista}>
+              <FlatList 
                 contentContainerStyle={styles.listItem}
                 data={this.state.dataSource}
                 renderItem={({item}) =>
@@ -116,13 +116,19 @@ const styles = StyleSheet.create({
     textAlign:'center'
   },
   listItem: {
-    backgroundColor: '#EEE',
+    
+    backgroundColor: '#fff',
     marginTop: 20,
     padding: 30,
   },
   textProcesso: {
     fontWeight: 'bold',
     fontSize: 18
+  },
+  lista : {
+    flexGrow: 4,
+    justifyContent:'center',
+    alignItems: 'center'
   },
   
 });
