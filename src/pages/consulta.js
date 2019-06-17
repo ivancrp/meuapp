@@ -4,7 +4,8 @@ import {
   Text,
   View,
   StatusBar ,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 
@@ -28,8 +29,13 @@ export default class Consulta extends Component {
        
 				<View style={styles.signupTextCont}> 
 					<TouchableOpacity onPress={this.login}>
-            <Text style={styles.signupButton}> Já tem uma, Sair</Text>
+          <Image
+          style={{width: 50, height: 50}}
+          source={require('../../assets/img/sair.png')}
+        />
+          <Text style={styles.signupButton}>  Sair</Text>
           </TouchableOpacity>
+          
 				</View>
 			</View>	
 			)
